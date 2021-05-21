@@ -9,6 +9,7 @@ import ru.mts.sales.backend.db.ABCGroup;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -22,9 +23,13 @@ public class ProductStv implements Serializable {
     @Id
     private String position;
     private String name = "";
-    private String category = "";
+    @ManyToOne
+    private CategoryStv category;
     private String shortName = "";
     private ABCGroup group = ABCGroup.A;
+
+    //todo ?
+    //String agreement;
 
     @Override
     public boolean equals(Object o) {

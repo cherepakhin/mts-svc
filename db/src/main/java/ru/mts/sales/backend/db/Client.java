@@ -1,11 +1,10 @@
-package ru.mts.sales.backend.db.stv;
+package ru.mts.sales.backend.db;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import ru.mts.sales.backend.db.AAgreement;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,24 +15,26 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "agreement_stv")
-public class AgreementStv extends AAgreement {
-    //todo ??
+@Table(name = "dealer")
+public class Client {
     @Id
-    String ppoAgreementId;
+    String id;
+    String ogrn = "";
+    String inn = "";
+    String region = "";
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AgreementStv)) return false;
+        if (!(o instanceof Client)) return false;
 
-        AgreementStv that = (AgreementStv) o;
+        Client client = (Client) o;
 
-        return ppoAgreementId != null ? ppoAgreementId.equals(that.ppoAgreementId) : that.ppoAgreementId == null;
+        return id != null ? id.equals(client.id) : client.id == null;
     }
 
     @Override
     public int hashCode() {
-        return ppoAgreementId != null ? ppoAgreementId.hashCode() : 0;
+        return id != null ? id.hashCode() : 0;
     }
 }

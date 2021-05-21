@@ -1,6 +1,8 @@
 package ru.mts.sales.backend.db.stv;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ru.mts.sales.backend.db.Warehouse;
 
 import javax.persistence.*;
@@ -11,12 +13,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Entity
 @Table(name = "remain_stock_stv")
-public class RemainStockStv  {
+public class RemainStockStv {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @ManyToOne
-    AgreementStv agreement;
     Integer amount;
     @ManyToOne
     ProductStv product;

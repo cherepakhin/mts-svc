@@ -1,44 +1,36 @@
-package ru.mts.sales.backend.db.stv;
+package ru.mts.sales.backend.db.mb;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.FieldDefaults;
-import ru.mts.sales.backend.db.Client;
+import ru.mts.sales.backend.db.Warehouse;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "recommended_order_stv")
-public class RecommendOrderStv implements Serializable {
+@Table(name = "remain_stock_mb")
+public class RemainStockMb {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
+    Integer amount;
     @ManyToOne
-    AgreementStv agreement;
-    String discount = "";
-    @ManyToOne
-    ProductStv product;
+    ProductMb product;
     @Column(columnDefinition = "DECIMAL(7,2)")
     BigDecimal price = BigDecimal.ZERO;
-    Integer count = 0;
     @ManyToOne
-    Client client;
+    Warehouse warehouse;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof RecommendOrderStv)) return false;
+        if (!(o instanceof RemainStockMb)) return false;
 
-        RecommendOrderStv that = (RecommendOrderStv) o;
+        RemainStockMb that = (RemainStockMb) o;
 
         return id != null ? id.equals(that.id) : that.id == null;
     }

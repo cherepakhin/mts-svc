@@ -5,42 +5,36 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import ru.mts.sales.backend.db.Client;
+import ru.mts.sales.backend.db.AOrder;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "recommended_order_stv")
-public class RecommendOrderStv implements Serializable {
+@Table(name = "order_stv")
+public class OrderStv extends AOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
     @ManyToOne
     AgreementStv agreement;
-    String discount = "";
-    @ManyToOne
-    ProductStv product;
-    @Column(columnDefinition = "DECIMAL(7,2)")
-    BigDecimal price = BigDecimal.ZERO;
-    Integer count = 0;
-    @ManyToOne
-    Client client;
+    @OneToMany(mappedBy = "order")
+    Set<OrderItemStv> items = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof RecommendOrderStv)) return false;
+        if (!(o instanceof OrderStv)) return false;
 
-        RecommendOrderStv that = (RecommendOrderStv) o;
+        OrderStv orderStv = (OrderStv) o;
 
-        return id != null ? id.equals(that.id) : that.id == null;
+        return id != null ? id.equals(orderStv.id) : orderStv.id == null;
     }
 
     @Override

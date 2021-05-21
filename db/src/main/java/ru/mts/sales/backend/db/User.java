@@ -1,39 +1,41 @@
-package ru.mts.sales.backend.db.stv;
+package ru.mts.sales.backend.db;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import ru.mts.sales.backend.db.AAgreement;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "agreement_stv")
-public class AgreementStv extends AAgreement {
-    //todo ??
+@Table(name = "users")
+public class User implements Serializable {
     @Id
-    String ppoAgreementId;
+    String ppoUserId; // ppoUserId
+    @ManyToOne
+    Client client; // dealer_id
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AgreementStv)) return false;
+        if (!(o instanceof User)) return false;
 
-        AgreementStv that = (AgreementStv) o;
+        User user = (User) o;
 
-        return ppoAgreementId != null ? ppoAgreementId.equals(that.ppoAgreementId) : that.ppoAgreementId == null;
+        return ppoUserId != null ? ppoUserId.equals(user.ppoUserId) : user.ppoUserId == null;
     }
 
     @Override
     public int hashCode() {
-        return ppoAgreementId != null ? ppoAgreementId.hashCode() : 0;
+        return ppoUserId != null ? ppoUserId.hashCode() : 0;
     }
 }

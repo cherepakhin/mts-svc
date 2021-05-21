@@ -2,43 +2,33 @@ package ru.mts.sales.backend.db.stv;
 
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import ru.mts.sales.backend.db.Client;
+import ru.mts.sales.backend.db.AItem;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.math.BigDecimal;
 
-@NoArgsConstructor
 @Getter
 @Setter
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "recommended_order_stv")
-public class RecommendOrderStv implements Serializable {
+@Table(name = "order_item_stv")
+public class OrderItemStv extends AItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
-    @ManyToOne
-    AgreementStv agreement;
-    String discount = "";
     @ManyToOne
     ProductStv product;
-    @Column(columnDefinition = "DECIMAL(7,2)")
-    BigDecimal price = BigDecimal.ZERO;
-    Integer count = 0;
     @ManyToOne
-    Client client;
+    @JoinColumn(name = "order_stv_id", nullable = false)
+    private OrderStv order;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof RecommendOrderStv)) return false;
+        if (!(o instanceof OrderItemStv)) return false;
 
-        RecommendOrderStv that = (RecommendOrderStv) o;
+        OrderItemStv that = (OrderItemStv) o;
 
         return id != null ? id.equals(that.id) : that.id == null;
     }

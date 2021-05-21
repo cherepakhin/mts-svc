@@ -20,21 +20,22 @@ import java.io.Serializable;
 public class ProductMb implements Serializable {
     static final long serialVersionUID = 1L;
     @Id
-    private String code;
+    String code;
+    //todo причесать
     String name;
-    private String numberType;
-    private String service1;
-    private String accountNumber;
-    private String packages;
-    private String sale;
-    private String balance;
-    private String price;
-    private String blocking;
-    private String comment;
-    private String tarif;
-    private String begin;
-    private String end;
-    private String orderRestriction;
+    String numberType;
+    String service1;
+    String accountNumber;
+    String packages;
+    String sale;
+    String balance;
+    String price;
+    String blocking;
+    String comment;
+    String tarif;
+    String begin;
+    String end;
+    String orderRestriction;
 
     @Override
     public boolean equals(Object o) {

@@ -16,7 +16,8 @@ public class Warehouse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String name="";
+    String title = "";
+    String address = "";
 
     @Override
     public boolean equals(Object o) {
